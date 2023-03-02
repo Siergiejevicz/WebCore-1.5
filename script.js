@@ -1,48 +1,69 @@
-   var buttonHide =  document.querySelector('.button-hide');
-   var buttonShow = document.querySelector('.button-show');
-   var swiperCont = document.querySelector('.swiper')
-   buttonShow.classList.add('button-none');
-   buttonHide.classList.add('button-none');
-   
+let swiperCont = document.querySelector('.swiper');
+let button = document.querySelector('.swiper-button');
+let swiperBrend = document.querySelector('.main-page');
 
-if (window.screen.width <= 767) {  
-var swiper = new Swiper('.swiper', {
-   pagination: {
-      el: '.swiper-pagination',   
-      clickable:false,
-   },
+
+if (window.screen.width <= 767) { 
+  
+const swiper = new Swiper('.swiper', {
+  
+  direction: 'horizontal',
+  loop: true,
+
+  
+  pagination: {
+    el: '.swiper-pagination',
+    type: 'bullets',
+    clickable: true,
+    
+  },
   freeMode: true,
-   breakpoints: {
+   clickable: true,
+   grabCursor: true,
+   slideToClickedSlide: true,
+  keyboard: {
+    enabled: true,
+    onlyInViewport: false,
+  },
+ 
+  mousewheel: {
+    invert: true,
+  },
+  breakpoints: {
    300: {
-      slidesPerView: 1.3,
+      slidesPerView: 1.4,
    },
    500: {
-      slidesPerView: 2.2,   
+      slidesPerView: 2.1,   
    },
    690: {
-      slidesPerView: 2.7, 
+      slidesPerView: 2.8, 
    }
    }
- });
+   
+});
 }
 
-   if(window.screen.width >= 767) {  
-      buttonShow.classList.remove('button-none');
-      buttonShow.addEventListener('click', function (evt) {
-      evt.preventDefault();
-      buttonHide.classList.remove('button-none');
-      buttonShow.classList.add('button-none');
-      swiperCont.classList.add('swiper-button-active')
-      })
 
-      buttonHide.addEventListener('click', function (evt) {
-         evt.preventDefault();
-         buttonHide.classList.add('button-none');
-         buttonShow.classList.remove('button-none');
-         swiperCont.classList.remove('swiper-button-active')
-         })
-   }
-
+ if(window.screen.width >= 767) {  
+      button.addEventListener('click', function (evt) {
+        evt.preventDefault();
+        if (button.classList.contains('swiper-button')) {
+            button.classList.remove('swiper-button');
+            button.classList.add('swiper-button--hide');
+           
+            button.textContent = 'Скрыть';
+            swiperBrend.classList.add('main-page--open')
+            swiperCont.classList.add('swiper--open')
+        } else if (button.classList.contains('swiper-button--hide')) {
+            button.classList.remove('swiper-button--hide');
+                button.classList.add('swiper-button');
+                button.textContent = 'Показать все';
+                swiperBrend.classList.remove('main-page--open')
+                swiperCont.classList.remove('swiper--open')
+        }
+      });
+ }
    
 
 
